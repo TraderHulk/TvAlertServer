@@ -8,6 +8,8 @@
 
 ​	
 
+​	
+
 ### 1、安装部署工具步骤
 
 ​	以linux服务器为例
@@ -79,8 +81,10 @@ source source_run.sh stop  #停止服务
 
   至于怎么在tv上设置警报，可以看我的YouTube视频。目前消息模版是：以SUSHI-USDT-SWAP为例：
 
-  
+  如何生成TV警报消息，请移步白嫖客户端：
 
+  https://github.com/TraderHulk/TvalertMessageGernerator
+  
   ```json
   {
     "exchange":"okx",
@@ -94,13 +98,13 @@ source source_run.sh stop  #停止服务
     "passphrase":"Hu18@",
     "diaccess_token":"",
     "keyword":""  
-  }
+}
   ```
 
   注意：⚠️
 
   ​	1)、 comment ：这个是策略信号函数后面带的commet，因此如果你的策略里没有comment，需要你在后面添加上，不影响策略本身。举个例子：
-
+  
   ```python
   if BT_Final_longCondition and Act_BT and testPeriod
       strategy.entry('long', strategy.long,  comment='entry_long')
@@ -111,7 +115,7 @@ source source_run.sh stop  #停止服务
   pips_corection = 1 / syminfo.mintick
   
   strategy.exit('Tsl', 'long', trail_points=math.abs(last_open_longCondition * (1 + tsi / 100) - last_open_longCondition) * pips_corection, trail_offset=high * (ts / 100) * pips_corection, loss=Act_sl ? math.abs(last_open_longCondition * (1 - sl / 100) - last_open_longCondition) * pips_corection : na, comment='tp_long')
-  strategy.exit('Tss', 'short', trail_points=math.abs(last_open_shortCondition * (1 - tsi / 100) - last_open_shortCondition) * pips_corection, trail_offset=low * (ts / 100) * pips_corection, loss=Act_sl ? math.abs(last_open_shortCondition * (1 + sl / 100) - last_open_shortCondition) * pips_corection : na, comment='tp_short')
+strategy.exit('Tss', 'short', trail_points=math.abs(last_open_shortCondition * (1 - tsi / 100) - last_open_shortCondition) * pips_corection, trail_offset=low * (ts / 100) * pips_corection, loss=Act_sl ? math.abs(last_open_shortCondition * (1 + sl / 100) - last_open_shortCondition) * pips_corection : na, comment='tp_short')
   ```
 
   2）、qty  ：下单量，以“张”为单位，不能是小数、也不能低于最小最大下单量。
@@ -119,7 +123,7 @@ source source_run.sh stop  #停止服务
   ​	 batch_qty ：分批止盈止损下单量 ，以张数为单位。
 
   3)、交易所的api 信息 是通过webhook 发送到服务工具的，必须设置！！但不一定只设置在tv消息里，也可以直接设置在tv_alert_server_app.py 里的InputDataItem class  属性里 写死它，然后重启服务。最后模版里是空字符串即可。具体的可以进免费的量化机器人交流群咨询学习。
-
+  
   
 
 ### 4、免责声明
